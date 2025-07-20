@@ -108,9 +108,9 @@
 #include "worldeddock.h"
 #include "worldlottool.h"
 
-#include "worlded/world.h"
-#include "worlded/worldcell.h"
-#include "worlded/worldedmgr.h"
+#include "world.h"
+#include "worldcell.h"
+#include "worldedmgr.h"
 
 #include <QDebug>
 #include <QDesktopServices>
@@ -1032,7 +1032,7 @@ bool MainWindow::InitConfigFiles()
 
     if (!BuildingTMX::instance()->readTxt()) {
         QMessageBox::critical(this, tr("It's no good, Jim!"),
-                              tr("Error while reading %1\n%2")
+                              tr("Error while reading BuildingTMX %1\n%2")
                               .arg(BuildingTMX::instance()->txtName())
                               .arg(BuildingTMX::instance()->errorString()));
         return false;
@@ -1040,7 +1040,7 @@ bool MainWindow::InitConfigFiles()
 
     if (!BuildingTilesMgr::instance()->readTxt()) {
         QMessageBox::critical(this, tr("It's no good, Jim!"),
-                              tr("Error while reading %1\n%2")
+                              tr("Error while reading BuildingTilesMgr %1\n%2")
                               .arg(BuildingTilesMgr::instance()->txtName())
                               .arg(BuildingTilesMgr::instance()->errorString()));
         return false;
@@ -1048,7 +1048,7 @@ bool MainWindow::InitConfigFiles()
 
     if (!FurnitureGroups::instance()->readTxt()) {
         QMessageBox::critical(this, tr("It's no good, Jim!"),
-                              tr("Error while reading %1\n%2")
+                              tr("Error while reading FurnitureGroups %1\n%2")
                               .arg(FurnitureGroups::instance()->txtName())
                               .arg(FurnitureGroups::instance()->errorString()));
         return false;
@@ -1056,7 +1056,7 @@ bool MainWindow::InitConfigFiles()
 
     if (!BuildingTemplates::instance()->readTxt()) {
         QMessageBox::critical(this, tr("It's no good, Jim!"),
-                              tr("Error while reading %1\n%2")
+                              tr("Error while reading BuildingTemplates %1\n%2")
                               .arg(BuildingTemplates::instance()->txtName())
                               .arg(BuildingTemplates::instance()->errorString()));
         return false;

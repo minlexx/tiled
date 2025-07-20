@@ -58,6 +58,8 @@ private:
 
 class InterruptibleThread : public QThread
 {
+    Q_OBJECT
+
 public:
     InterruptibleThread() :
         QThread(),
@@ -95,6 +97,8 @@ private:
 
 class Sleep : public QThread
 {
+    Q_OBJECT
+
 public:
     static void sleep(unsigned long secs) {
         QThread::sleep(secs);

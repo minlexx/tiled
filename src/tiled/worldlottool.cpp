@@ -22,9 +22,9 @@
 #include "mapscene.h"
 #include "worldeddock.h"
 
-#include "worlded/world.h"
-#include "worlded/worldcell.h"
-#include "worlded/worldedmgr.h"
+#include "world.h"
+#include "worldcell.h"
+#include "worldedmgr.h"
 
 #include "maprenderer.h"
 

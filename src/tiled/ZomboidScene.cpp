@@ -37,7 +37,7 @@
 #include "zlevelsmodel.h"
 #include "zlotmanager.h"
 
-#include "worlded/worldcell.h"
+#include "worldcell.h"
 
 #include <QGraphicsSceneMouseEvent>
 

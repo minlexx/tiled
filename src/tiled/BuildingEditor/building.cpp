@@ -32,7 +32,7 @@ Building::Building(int width, int height, BuildingTemplate *btemplate) :
     mHeight(height),
     mTiles(TileCount)
 {
-    Q_ASSERT(TileCount == BuildingTemplate::TileCount);
+    Q_ASSERT((int)TileCount == (int)BuildingTemplate::TileCount);
 
     if (btemplate) {
         mTiles = btemplate->tiles();

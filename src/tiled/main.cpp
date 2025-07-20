@@ -26,7 +26,7 @@
 #include "preferences.h"
 #include "tiledapplication.h"
 #ifdef ZOMBOID
-#include "worlded/worldedmgr.h"
+#include "worldedmgr.h"
 #include "zprogress.h"
 #include <QFileInfo>
 #include <QMessageBox>

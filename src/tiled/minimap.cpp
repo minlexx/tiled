@@ -33,7 +33,7 @@
 #include "tileset.h"
 #include "zlevelrenderer.h"
 
-#include "worlded/worldcell.h"
+#include "worldcell.h"
 
 #include <qmath.h>
 #include <QDebug>

@@ -28,8 +28,8 @@
 #include "tileset.h"
 #include "zprogress.h"
 
-#include "worlded/worldcell.h"
-#include "worlded/worldedmgr.h"
+#include "worldcell.h"
+#include "worldedmgr.h"
 
 #include <QDir>
 #include <QFileInfo>

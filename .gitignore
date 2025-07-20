@@ -30,3 +30,5 @@ tests/test_mapreader
 #bin
 
 *.bak
+
+CMakeLists.txt.user

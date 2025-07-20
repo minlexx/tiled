@@ -30,7 +30,6 @@
 #include "staggeredrenderer.h"
 #include "tilelayer.h"
 #include "tilesetmanager.h"
-#include "zprogress.h"
 #include "zlevelrenderer.h"
 
 #include <QDataStream>

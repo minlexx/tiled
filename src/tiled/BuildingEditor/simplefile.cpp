@@ -57,11 +57,22 @@ bool SimpleFile::read(const QString &filePath)
 
 bool SimpleFile::write(const QString &filePath)
 {
+    qDebug() << Q_FUNC_INFO << filePath;
+
     QTemporaryFile tempFile;
     if (!tempFile.open(/*QIODevice::WriteOnly | QIODevice::Text*/)) {
         mError = tempFile.errorString();
         return false;
     }
+
+    // From Qt docs for QTemporatyFile:
+    // On Linux, QTemporaryFile will attempt to create unnamed temporary files.
+    // If that succeeds, open() will return true but exists() will be false.
+    // If you call fileName() or any function that calls it, QTemporaryFile will
+    // give the file a name ...
+    // So, we need to call fileName() for it to not be empty
+    (void)tempFile.fileName();
+    qDebug() << "  temp file name: " << tempFile.fileName();
 
     replaceValue("version", QString::number(mVersion), false);
 
@@ -82,17 +93,14 @@ bool SimpleFile::write(const QString &filePath)
         if (backupFile.exists()) {
             if (!backupFile.remove()) {
                 mError = QString(QLatin1String("Error deleting file!\n%1\n\n%2"))
-                        .arg(backupPath)
-                        .arg(backupFile.errorString());
+                        .arg(backupPath, backupFile.errorString());
                 return false;
             }
         }
         QFile destFile(filePath);
         if (!destFile.rename(backupPath)) {
             mError = QString(QLatin1String("Error renaming file!\nFrom: %1\nTo: %2\n\n%3"))
-                    .arg(filePath)
-                    .arg(backupPath)
-                    .arg(destFile.errorString());
+                    .arg(filePath, backupPath, destFile.errorString());
             return false;
         }
     }
@@ -106,9 +114,7 @@ bool SimpleFile::write(const QString &filePath)
     // QTemporaryFile::rename() doesn't work across filesystems.  Should use QSaveFile instead.
     } else if (!tempFile.copy(filePath)) {
         mError = QString(QLatin1String("Error copying file!\nFrom: %1\nTo: %2\n\n%3"))
-                .arg(tempFile.fileName())
-                .arg(filePath)
-                .arg(tempFile.errorString());
+                .arg(tempFile.fileName(), filePath, tempFile.errorString());
         // Try to un-rename the backup file
         if (backupFile.exists())
             backupFile.rename(filePath); // might fail

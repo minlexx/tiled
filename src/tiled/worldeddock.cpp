@@ -23,8 +23,8 @@
 #include "mapdocument.h"
 #include "ZomboidScene.h"
 
-#include "worlded/worldcell.h"
-#include "worlded/worldedmgr.h"
+#include "worldcell.h"
+#include "worldedmgr.h"
 
 #include "maprenderer.h"
 

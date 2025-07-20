@@ -24,6 +24,8 @@
 #include <QObject>
 #include <QStringList>
 
+#include "threads.h"
+
 class MapComposite;
 class MapInfo;
 
@@ -31,7 +33,6 @@ namespace Tiled {
 class Map;
 }
 
-#include "threads.h"
 class MapImage;
 class MapImageReaderWorker : public BaseWorker
 {

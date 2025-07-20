@@ -168,7 +168,8 @@ lua_State *LuaScript::init()
 {
     L = luaL_newstate();
     luaL_openlibs(L);
-    tolua_tiled_open(L);
+    //tolua_tiled_open(L); // no such function defined anywhere in the repo
+    tolua_open(L);
 
     tolua_beginmodule(L,NULL);
 #if 0

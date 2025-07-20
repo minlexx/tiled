@@ -38,10 +38,12 @@
 #include "preferences.h"
 #include "zlevelrenderer.h"
 #include "zlevelsmodel.h"
-#include "worlded/world.h"
-#include "worlded/worldcell.h"
-#include "worlded/worldedmgr.h"
+
+#include "world.h"
+#include "worldcell.h"
+#include "worldedmgr.h"
 #endif
+
 #include "map.h"
 #include "mapobject.h"
 #include "movelayer.h"

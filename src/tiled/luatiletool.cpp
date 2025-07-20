@@ -119,7 +119,8 @@ void LuaTileTool::loadScript()
         lua_close(L);
     L = luaL_newstate();
     luaL_openlibs(L);
-    tolua_tiled_open(L);
+    //tolua_tiled_open(L); // no such function defined anywhere in the repo
+    tolua_open(L);
 
     tolua_pushusertype(L, this, "LuaTileTool");
     lua_setglobal(L, "self");
@@ -1037,9 +1038,11 @@ bool LuaToolFile::read(const QString &fileName)
     QDir luaDir = dir.filePath(QLatin1String("lua"));
     if (!luaDir.exists())
 #if defined(Q_OS_MAC)
-        luaDir = dir.filePath(QLatin1String("../Lua"));
+        //luaDir = dir.filePath(QLatin1String("../Lua"));
+        luaDir.setPath(dir.filePath(QLatin1String("../Lua")));
 #else
-        luaDir = dir.filePath(QLatin1String("../lua"));
+        //luaDir = dir.filePath(QLatin1String("../lua"));
+        luaDir.setPath(dir.filePath(QLatin1String("../lua")));
 #endif
 
     foreach (SimpleFileBlock block, simple.blocks) {
