@@ -49,7 +49,7 @@ bool LotPlugin::write(const Map *map, const QString &fileName)
         return false;
     }
 
-    mMapDir = QFileInfo(fileName).path();
+    mMapDir.setPath(QFileInfo(fileName).path());
 
     StartX = 10000;
     StartY = 10000;

@@ -1,29 +1,29 @@
-cmake_minimum_required( VERSION 2.6 )
-set ( CMAKE_BUILD_TYPE Release )
-#add_definitions ( -Wall )
-add_definitions(-DTENGINE_LIBRARY ${QT_DEFINITIONS} -DQT_PLUGIN -DQT_SHARED)
-find_package ( Qt4 REQUIRED )
-include ( ${QT_USE_FILE} )
-include_directories (
-	${CMAKE_CURRENT_SOURCE_DIR}/../../tiled
-	${CMAKE_CURRENT_SOURCE_DIR}/../../libtiled
-	${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}
-	${QT_QTCORE_INCLUDE_DIR} ${QT_QTGUI_INCLUDE_DIR}
-	)
-set ( tengine_HDRS
-	tengine_global.h
-	)
+project(tengine)
 
-set ( tengine_SRCS
-	tengineplugin.cpp
-	)
+add_library(tengine MODULE)
 
-set ( tengine_MOCS
-	tengineplugin.h
-	)
-QT4_WRAP_CPP(MOCS ${tengine_MOCS})
+target_compile_definitions(tengine PRIVATE
+    -DTENGINE_LIBRARY
+    -DQT_PLUGIN
+    -DQT_SHARED
+)
 
-add_library ( tengine SHARED ${tengine_SRCS} ${UIS} ${RSCS} ${TRS} ${MOCS} )
-target_link_libraries ( tengine libtiled ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} )
+target_include_directories(tengine PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../tiled
+)
 
-INSTALL(TARGETS tengine RUNTIME DESTINATION plugins/tiled LIBRARY DESTINATION plugins/tiled)
+set(tengine_SRCS
+    tengine_global.h
+    tengineplugin.cpp
+    tengineplugin.h
+)
+
+target_sources(tengine PRIVATE ${tengine_SRCS})
+
+target_link_libraries(tengine PRIVATE tiled Qt::Core Qt::Gui Qt::Widgets)
+
+INSTALL(TARGETS tengine
+    RUNTIME DESTINATION plugins/tiled
+    LIBRARY DESTINATION plugins/tiled
+)
+

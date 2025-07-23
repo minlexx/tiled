@@ -1,9 +1,8 @@
 project(droidcraft)
 
 set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTOUIC ON)
 
-add_library(droidcraft MODULE ${droidcraft_SRCS})
+add_library(droidcraft MODULE)
 
 target_compile_definitions(droidcraft PRIVATE
     -DDROIDCRAFT_LIBRARY

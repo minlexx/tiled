@@ -55,7 +55,7 @@ bool LuaPlugin::write(const Map *map, const QString &fileName)
         return false;
     }
 
-    mMapDir = QFileInfo(fileName).path();
+    mMapDir.setPath(QFileInfo(fileName).path());
 
     LuaTableWriter writer(&file);
     writer.writeStartDocument();

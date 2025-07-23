@@ -1,35 +1,32 @@
-cmake_minimum_required( VERSION 2.6 )
-set ( CMAKE_BUILD_TYPE Release )
-#add_definitions ( -Wall )
-add_definitions( -DJSON_LIBRARY )
-find_package ( Qt4 REQUIRED )
-include ( ${QT_USE_FILE} )
-include_directories (
-	${CMAKE_CURRENT_SOURCE_DIR}/../../tiled
-	${CMAKE_CURRENT_SOURCE_DIR}/../../libtiled
-	${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}
-	${QT_QTCORE_INCLUDE_DIR} ${QT_QTGUI_INCLUDE_DIR}
-	)
-set ( json_HDRS
-	json_global.h
-	qjsonparser/json.h
-	varianttomapconverter.h
-	maptovariantconverter.h
-	)
+project(json)
 
-set ( json_SRCS
-	jsonplugin.cpp
-	qjsonparser/json.cpp
-	varianttomapconverter.cpp
-	maptovariantconverter.cpp
-	)
+set(CMAKE_AUTOMOC ON)
 
-set ( json_MOCS
-	jsonplugin.h
-	)
-QT4_WRAP_CPP(MOCS ${json_MOCS})
+add_library(json MODULE)
 
-add_library ( json SHARED ${json_SRCS} ${UIS} ${RSCS} ${TRS} ${MOCS} )
-target_link_libraries ( json libtiled ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} )
+target_compile_definitions(json PRIVATE -DJSON_LIBRARY)
 
-INSTALL(TARGETS json RUNTIME DESTINATION plugins/tiled LIBRARY DESTINATION plugins/tiled)
+target_include_directories(json PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../tiled
+)
+
+set(json_SRCS
+    json_global.h
+    jsonplugin.cpp
+    jsonplugin.h
+    maptovariantconverter.cpp
+    maptovariantconverter.h
+    qjsonparser/json.cpp
+    qjsonparser/json.h
+    varianttomapconverter.cpp
+    varianttomapconverter.h
+)
+
+target_sources(json PRIVATE ${json_SRCS})
+
+target_link_libraries(json PRIVATE tiled Qt::Core Qt::Gui)
+
+INSTALL(TARGETS json
+    RUNTIME DESTINATION plugins/tiled
+    LIBRARY DESTINATION plugins/tiled
+)
