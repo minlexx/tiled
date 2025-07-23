@@ -160,6 +160,15 @@ int main(int argc, char *argv[])
 
     a.setOrganizationName(QLatin1String("TheIndieStone"));
     a.setApplicationName(QLatin1String("TileZed"));
+
+    /*
+     * organzationDomain + applicationName is used by Wayland compositors
+     * to find application's .desktop file and to set window icon from it.
+     * In this case file should be named "com.theindiestone.TileZed.desktop"
+     * and have Icon= in it for app to have proper icon set in Wayland.
+     */
+    a.setOrganizationDomain(QLatin1String("theindiestone.com"));
+
 #ifdef BUILD_INFO_VERSION
     a.setApplicationVersion(QLatin1String(AS_STRING(BUILD_INFO_VERSION)));
 #else
